@@ -1,0 +1,6 @@
+[postgresql]
+db_host = localhost
+db_port = 5432
+db_name = db_name_user
+db_user = postgres
+db_password = db_password
