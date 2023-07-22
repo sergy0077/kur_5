@@ -13,6 +13,7 @@ class DBManager:
             user=params['db_user'],
             password=params['db_password']
         )
+        self.user_agent = params['user_agent']
         self.companies = []  # Объявляем переменную экземпляра 'companies' как список
         self.vacancies = []  # Объявляем переменную экземпляра 'vacancies' как список
 
@@ -45,7 +46,7 @@ class DBManager:
         # Получение списка компаний с API hh.ru
         url_hh = f"https://api.hh.ru/employers/{id_company}"
         params = {'per_page': '100'}
-        headers = {"User-Agent": "50355527"}  # User-Agent взят из личного кабинета hh.ru
+        headers = {"User-Agent": self.user_agent}  # Используем значение User-Agent из self.user_agent
         response = requests.get(url_hh, headers=headers, params=params)
         if response.status_code == 200:
             companies_data = response.json()
@@ -58,7 +59,7 @@ class DBManager:
         # Получение списка вакансий с API hh.ru
         url_hh = f"https://api.hh.ru/vacancies"
         params = {'employer_id': id_company, 'per_page': '100'}
-        headers = {"User-Agent": "6589757"}  # User-Agent из личного кабинета hh.ru
+        headers = {"User-Agent": self.user_agent}  # Используем значение User-Agent из self.user_agent
         response = requests.get(url_hh, headers=headers, params=params)
         if response.status_code == 200:
             vacancies_data = response.json()

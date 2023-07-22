@@ -4,7 +4,15 @@ from config import config
 
 def main():
     params = config(filename=r"database.ini")
+
+    # Получаем значение User-Agent от пользователя
+    user_agent = input("Введите значение User-Agent, взятого из личного кабинета hh.ru: ")
+
+    # Добавляем user_agent в params
+    params['user_agent'] = user_agent
+
     print(params)
+
     # Создание экземпляра DBManager
     db_manager = DBManager(params)
 
